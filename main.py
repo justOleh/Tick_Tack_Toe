@@ -1,5 +1,6 @@
 import pygame
 from settings import *
+from game_objects import *
 
 def main ():
 
@@ -9,6 +10,20 @@ def main ():
 
     screen = pygame.display.set_mode(SIZE)
 
+
+    #game objects
+    background = Background()
+
+
+    #groups
+    all_objects = pygame.sprite.Group()
+
+    #adding objects to groups
+    all_objects.add(background)
+
+
+
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -17,17 +32,13 @@ def main ():
 
         screen.fill(BACKGROUND_COLOR)
 
-        #background = pygame.sprite.Sprite()
-        background_image = pygame.image.load(BACKGROUND_PATH)
-        background_rect = background_image.get_rect()
-        background_rect.centerx = WIDTH // 2
 
 
         icon = pygame.image.load(ICON_PATH)
         pygame.display.set_icon(icon)
 
 
-        screen.blit(background_image,background_rect)
+        all_objects.draw(screen)
 
         pygame.display.flip()
 
