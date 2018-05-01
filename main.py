@@ -1,6 +1,9 @@
 import pygame
 from settings import *
+
 from game_objects import *
+
+game_state = GameState()
 
 def main ():
 
@@ -10,18 +13,10 @@ def main ():
 
     screen = pygame.display.set_mode(SIZE)
 
-
     #game objects
     background = Background()
 
-
-    #groups
-    all_objects = pygame.sprite.Group()
-
-    #adding objects to groups
-    all_objects.add(background)
-
-
+    game_state.objects.add(background)
 
 
     while True:
@@ -32,15 +27,19 @@ def main ():
 
         screen.fill(BACKGROUND_COLOR)
 
-
-
         icon = pygame.image.load(ICON_PATH)
         pygame.display.set_icon(icon)
 
 
-        all_objects.draw(screen)
+        game_state.update()
+
+        game_state.draw_points()
+
+        game_state.objects.draw(screen)
 
         pygame.display.flip()
+
+        pygame.time.wait(25)
 
 
 if __name__ == "__main__":
